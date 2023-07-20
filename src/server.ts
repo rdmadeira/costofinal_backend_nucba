@@ -1,7 +1,7 @@
 import express, { Express } from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import { connectToDB, clientDB } from './config/db.js';
+import { connectToDB } from './db/config.js';
 
 dotenv.config();
 connectToDB().catch((error) => console.log('error', error));
@@ -15,10 +15,6 @@ server.use(cors());
 
 // Routes:
 server.get('/', async (req, res) => {
-  console.log(
-    'client',
-    await clientDB.db('costofinal').collection('categories').findOne()
-  );
   res.json({
     data: 'ok',
   });
