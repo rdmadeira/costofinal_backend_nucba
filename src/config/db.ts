@@ -8,7 +8,7 @@ const uri: string = process.env.DB_URL!.replace(
 );
 console.log('uri', uri);
 
-const clientDB = new MongoClient(uri, {
+export const clientDB = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
     strict: true,
