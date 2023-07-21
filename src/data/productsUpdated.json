@@ -2854,16 +2854,18 @@
         "id": "e364b965-6c2d-4a0e-9bb9-f828ff701221"
       },
       {
-        "PRECIO": 0,
+        "PRECIO": 1430.43,
         "TIPO": "Termocuplas solas",
+        "CODIGO": "TSIT30",
         "KIT": 10,
         "MEDIDA": "Termocuplas simil SIT 30 CM",
         "id": "20bc7b63-52cb-4a23-bf57-eea3bcc2a0ca"
       },
       {
-        "PRECIO": 0,
+        "PRECIO": 1579.53,
         "TIPO": "Termocuplas solas",
         "KIT": 10,
+        "CODIGO": "TSIT60",
         "MEDIDA": "Termocuplas simil SIT 60 CM",
         "id": "3292e772-0666-48ef-b1e7-efe42f14bc4c"
       },
@@ -2888,7 +2890,7 @@
       {
         "PRECIO": 79.30137600000002,
         "TIPO": "Soportes",
-        "CODIGO": "T8X1",
+        "CODIGO": "TS8X1",
         "KIT": 20,
         "MEDIDA": "Soporte8 X 1",
         "id": "b96f12c3-3470-4e15-8bb5-7f1e868e5c37"
@@ -3380,9 +3382,9 @@
         "id": "ec9e3a63-70ac-48ba-be89-bcfa7f31bed8"
       },
       {
-        "PRECIO": 961.7372999999999,
+        "PRECIO": 590.73,
         "TIPO": "Tees Inserto",
-        "CODIGO": "TEEM2512F",
+        "CODIGO": "TEEM2012F",
         "KIT": 20,
         "MEDIDA": "TEE C/ INSERTO METALICO MACHO 20X12  FUSION",
         "id": "d0502258-d053-4baf-b520-d059f6a3ad3d"

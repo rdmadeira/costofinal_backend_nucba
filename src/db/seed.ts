@@ -126,15 +126,14 @@ const subCategoriesList = [
 
 const productsList: Document[] = getFlatMapProductsJson();
 
-const busqueda = productsList.reduce((acc, product) => {
+/* const busquedaRepetidos = productsList.reduce((acc, product) => {
   acc[product.CODIGO] = ++acc[product.CODIGO] || 0;
   return acc;
 }, {});
 const duplicados = productsList.filter((persona) => {
-  return busqueda[persona.CODIGO];
-});
-
-console.log('duplicados', duplicados, duplicados.length);
+  return busquedaRepetidos[persona.CODIGO];
+}); */
+// console.log('duplicados', duplicados, duplicados.length);
 
 const seedCategoriesToDB = async (
   documents: Document[],
@@ -205,14 +204,12 @@ const seedProductsToDB = async (
   }
 };
 
-// // Ejecutar los seed por funcion:
+// // Ejecutar los seeds por funcion:
 // drop: true elimina la colleccion y crea nuevos _id's OJO!!!!!!!
 // seedCategoriesToDB(categoriesList /*, { drop: true }) */);
 
 // drop: true elimina la colleccion y crea nuevos _id's OJO!!!!!!!
 // seedsubCategoriesToDB(subCategoriesList /* , { drop: true } */);
 
-console.log('sub', subCategoriesList.length);
-console.log('prod', productsList.length);
 // drop: true elimina la colleccion y crea nuevos _id's OJO!!!!!!!
-// seedProductsToDB(productsList, { drop: true });
+// seedProductsToDB(productsList/* , { drop: true } */);
