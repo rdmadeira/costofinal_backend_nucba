@@ -55,9 +55,10 @@ const subCategoriesList = [
   { name: 'Tees', category: '64b99b45fce65a50f8b13d21' },
   { name: 'Uniones', category: '64b99b45fce65a50f8b13d21' },
   { name: 'Mariposas', category: '64b99b45fce65a50f8b13d22' },
+  { name: 'Prolongaciones', category: '64b99b45fce65a50f8b13d22' },
   { name: 'Tapas', category: '64b99b45fce65a50f8b13d22' },
   { name: 'Virolas', category: '64b99b45fce65a50f8b13d22' },
-  { name: 'Bujes Reducción', category: '64b99b45fce65a50f8b13d22' },
+  { name: 'Bujes de Reduccion', category: '64b99b45fce65a50f8b13d22' },
   { name: 'Uniones', category: '64b99b45fce65a50f8b13d22' },
   { name: 'Conexiones de cocina', category: '64b99b45fce65a50f8b13d22' },
   { name: 'Tetones', category: '64b99b45fce65a50f8b13d22' },
@@ -69,20 +70,20 @@ const subCategoriesList = [
   { name: 'Tuercas', category: '64b99b45fce65a50f8b13d22' },
   { name: 'Nuez', category: '64b99b45fce65a50f8b13d22' },
   { name: 'Cuplas', category: '64b99b45fce65a50f8b13d22' },
-  { name: 'Codos Reducción', category: '64b99b45fce65a50f8b13d23' },
+  { name: 'Codos Reduccion', category: '64b99b45fce65a50f8b13d23' },
   { name: 'Union Manguera', category: '64b99b45fce65a50f8b13d23' },
   { name: 'Codo Manguera', category: '64b99b45fce65a50f8b13d23' },
   { name: 'Codos', category: '64b99b45fce65a50f8b13d23' },
   { name: 'Tees', category: '64b99b45fce65a50f8b13d23' },
-  { name: 'Espigas Reduccion', category: '64b99b45fce65a50f8b13d24' },
+  { name: 'Espigas reducción', category: '64b99b45fce65a50f8b13d24' },
   { name: 'Tees', category: '64b99b45fce65a50f8b13d24' },
   { name: 'Codos', category: '64b99b45fce65a50f8b13d24' },
-  { name: 'Espigas Rosca', category: '64b99b45fce65a50f8b13d24' },
-  { name: 'Espigas Doble', category: '64b99b45fce65a50f8b13d24' },
+  { name: 'Espigas rosca', category: '64b99b45fce65a50f8b13d24' },
+  { name: 'Espigas doble', category: '64b99b45fce65a50f8b13d24' },
   { name: 'Curvas', category: '64b99b45fce65a50f8b13d25' },
   { name: 'Entreroscas', category: '64b99b45fce65a50f8b13d25' },
   { name: 'Tapones', category: '64b99b45fce65a50f8b13d25' },
-  { name: 'Bujes Reduccion', category: '64b99b45fce65a50f8b13d25' },
+  { name: 'Bujes Reducción', category: '64b99b45fce65a50f8b13d25' },
   { name: 'Niples', category: '64b99b45fce65a50f8b13d25' },
   { name: 'Cuplas', category: '64b99b45fce65a50f8b13d25' },
   { name: 'Codos', category: '64b99b45fce65a50f8b13d25' },
@@ -94,7 +95,7 @@ const subCategoriesList = [
   { name: 'Tapas', category: '64b99b45fce65a50f8b13d26' },
   { name: 'Termocuplas solas', category: '64b99b45fce65a50f8b13d27' },
   {
-    name: 'Termocuplas c/tuerca & soporte intercamb.',
+    name: 'Termocuplas c/ tuerca & soporte intercamb. ',
     category: '64b99b45fce65a50f8b13d27',
   },
   { name: 'Tuercas', category: '64b99b45fce65a50f8b13d27' },
@@ -106,24 +107,34 @@ const subCategoriesList = [
   { name: 'Cuplas', category: '64b99b45fce65a50f8b13d28' },
   { name: 'Cuplas Inserto', category: '64b99b45fce65a50f8b13d28' },
   { name: 'Uniones Dobles', category: '64b99b45fce65a50f8b13d28' },
-  { name: 'Bujes Fusion', category: '64b99b45fce65a50f8b13d28' },
+  { name: 'Buje Fusion', category: '64b99b45fce65a50f8b13d28' },
   { name: 'Tapas', category: '64b99b45fce65a50f8b13d28' },
   { name: 'Tees', category: '64b99b45fce65a50f8b13d28' },
   { name: 'Tees Inserto', category: '64b99b45fce65a50f8b13d28' },
   { name: 'Codos', category: '64b99b45fce65a50f8b13d28' },
   { name: 'Codos Inserto', category: '64b99b45fce65a50f8b13d28' },
   { name: 'Curvas', category: '64b99b45fce65a50f8b13d28' },
-  { name: 'Valvulas', category: '64b99b45fce65a50f8b13d28' },
+  { name: 'Valvula', category: '64b99b45fce65a50f8b13d28' },
   { name: 'Llaves', category: '64b99b45fce65a50f8b13d28' },
   { name: 'Sobrepasos Largos', category: '64b99b45fce65a50f8b13d28' },
-  { name: 'Tarugos sin tope', category: '64b99b45fce65a50f8b13d29' },
-  { name: 'Tarugos con tope', category: '64b99b45fce65a50f8b13d29' },
-  { name: 'Cintas', category: '64b99b45fce65a50f8b13d29' },
-  { name: 'Llanas', category: '64b99b45fce65a50f8b13d29' },
-  { name: 'Espatulas', category: '64b99b45fce65a50f8b13d29' },
+  { name: 'Tarugos SIN tope', category: '64b99b45fce65a50f8b13d29' },
+  { name: 'Tarugos CON tope', category: '64b99b45fce65a50f8b13d29' },
+  { name: 'CINTAS', category: '64b99b45fce65a50f8b13d29' },
+  { name: 'LLANAS', category: '64b99b45fce65a50f8b13d29' },
+  { name: 'ESPATULAS', category: '64b99b45fce65a50f8b13d29' },
 ];
 
 const productsList: Document[] = getFlatMapProductsJson();
+
+const busqueda = productsList.reduce((acc, product) => {
+  acc[product.CODIGO] = ++acc[product.CODIGO] || 0;
+  return acc;
+}, {});
+const duplicados = productsList.filter((persona) => {
+  return busqueda[persona.CODIGO];
+});
+
+console.log('duplicados', duplicados, duplicados.length);
 
 const seedCategoriesToDB = async (
   documents: Document[],
@@ -188,16 +199,20 @@ const seedProductsToDB = async (
       );
     });
 
-    console.log('Succesfully upsert many subcategories documents to database');
+    console.log('Succesfully upsert many products documents to database');
   } catch (error) {
     console.log('error', error);
   }
 };
 
 // // Ejecutar los seed por funcion:
+// drop: true elimina la colleccion y crea nuevos _id's OJO!!!!!!!
 // seedCategoriesToDB(categoriesList /*, { drop: true }) */);
 
 // drop: true elimina la colleccion y crea nuevos _id's OJO!!!!!!!
-// seedsubCategoriesToDB(subCategoriesList /*, { drop: true }) */);
+// seedsubCategoriesToDB(subCategoriesList /* , { drop: true } */);
 
-// seedProductsToDB(productsList /* , { drop: true } */);
+console.log('sub', subCategoriesList.length);
+console.log('prod', productsList.length);
+// drop: true elimina la colleccion y crea nuevos _id's OJO!!!!!!!
+// seedProductsToDB(productsList, { drop: true });
