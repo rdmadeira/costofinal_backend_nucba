@@ -14,20 +14,20 @@ const SubcategoriesSchema = new Schema({
 });
 
 const ProductsSchema = new Schema({
-  CODIGO: { type: String, require: true },
-  KIT: { type: Number, require: true },
-  MEDIDA: { type: String, require: true },
-  PRECIO: { type: Number, require: true },
+  CODIGO: { type: String, required: true },
+  KIT: { type: Number, required: true },
+  MEDIDA: { type: String, required: true },
+  PRECIO: { type: Number, required: true },
   SUBCATEGORY: {
     type: Schema.ObjectId,
-    require: true,
+    required: true,
     ref: mongoose.model('subcategories', SubcategoriesSchema),
   },
 });
 
-type CategoriesType = InferSchemaType<typeof CategoriesSchema>;
-type SubCategoriesType = InferSchemaType<typeof SubcategoriesSchema>;
-type ProductsType = InferSchemaType<typeof ProductsSchema>;
+export type CategoriesType = InferSchemaType<typeof CategoriesSchema>;
+export type SubCategoriesType = InferSchemaType<typeof SubcategoriesSchema>;
+export type ProductsType = InferSchemaType<typeof ProductsSchema>;
 
 export const categories = mongoose.model<CategoriesType>(
   'categories',

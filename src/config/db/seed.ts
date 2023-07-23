@@ -2,7 +2,7 @@ import fs from 'fs';
 import { Document, ObjectId } from 'mongodb';
 
 import { connectToDB } from './config.js';
-import { categories, products, subCategories } from '../models/schema.js';
+import { categories, products, subCategories } from '../../models/schema.js';
 
 function getFlatMapProductsJson() {
   const productsUpdatedPath = new URL(
