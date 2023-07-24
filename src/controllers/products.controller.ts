@@ -4,16 +4,16 @@ import { products } from '../models/schema.js';
 
 import { ServerError } from '../entities/errors/ServerError.js';
 
-export const getProductsBySubcategoryController = async (
+export const getProductsBySubcategoryIdController = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const { categoryId } = req.params;
+  const { subcategoryId } = req.params;
 
   try {
     const productsBySubcategory: ProductsType[] = await products.find({
-      SUBCATEGORY: categoryId,
+      SUBCATEGORY: subcategoryId,
     });
 
     return res.status(200).json({

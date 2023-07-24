@@ -1,6 +1,6 @@
 import { CustomError } from './CustomError.js';
 
-export class ServerError extends CustomError {
+export class NotAuthorizedError extends CustomError {
   constructor() {
     super('Not Authorized!');
 

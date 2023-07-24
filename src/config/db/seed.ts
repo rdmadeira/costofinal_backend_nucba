@@ -2,7 +2,15 @@ import fs from 'fs';
 import { Document, ObjectId } from 'mongodb';
 
 import { connectToDB } from './config.js';
-import { categories, products, subCategories } from '../../models/schema.js';
+import {
+  categories,
+  products,
+  subCategories,
+  roles,
+  status,
+  RoleType,
+  StatusType,
+} from '../../models/schema.js';
 
 function getFlatMapProductsJson() {
   const productsUpdatedPath = new URL(
@@ -204,6 +212,30 @@ const seedProductsToDB = async (
   }
 };
 
+const seedRolesToDB = async (
+  rolesList: RoleType[],
+  options: { drop: boolean } = { drop: false }
+) => {
+  await connectToDB().then(() => console.log('connected to DB'));
+  if (options.drop) roles.collection.drop();
+
+  const insertResponse = await roles.insertMany(rolesList, { rawResult: true }); // rawResult configura si la respuesta el array de los documentos insertados, o el objeto de insertMany
+  console.log('insertResponse', insertResponse);
+};
+
+const seedStatusToDB = async (
+  statusList: StatusType[],
+  options: { drop: boolean } = { drop: false }
+) => {
+  await connectToDB().then(() => console.log('connected to DB'));
+  if (options.drop) status.collection.drop();
+
+  const insertResponse = await status.insertMany(statusList, {
+    rawResult: true,
+  }); // rawResult configura si la respuesta el array de los documentos insertados, o el objeto de insertMany
+  console.log('insertResponse', insertResponse);
+};
+
 // // Ejecutar los seeds por funcion:
 // drop: true elimina la colleccion y crea nuevos _id's OJO!!!!!!!
 // seedCategoriesToDB(categoriesList /*, { drop: true }) */);
@@ -213,3 +245,14 @@ const seedProductsToDB = async (
 
 // drop: true elimina la colleccion y crea nuevos _id's OJO!!!!!!!
 // seedProductsToDB(productsList/* , { drop: true } */);
+
+// seedRolesToDB([{ role: 'admin' }, { role: 'user' }]/* , { drop: true } */);
+
+seedStatusToDB(
+  [
+    { status: 'pending' },
+    { status: 'process' },
+    { status: 'approved' },
+    { status: 'rejected' },
+  ] /* , { drop: true } */
+);
