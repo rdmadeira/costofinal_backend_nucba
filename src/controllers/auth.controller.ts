@@ -102,10 +102,16 @@ export const signupController = async (
       },
       message: 'Succesfully Created Account!',
     });
-  } catch (error: MongooseError | Error | any | unknown) {
+  } catch (error) {
     console.log('error', error);
 
-    const err = new ServerError('Error in DB connection');
-    return next(err);
+    let serviceError;
+    if (error instanceof Error) {
+      serviceError = new ServerError(error.message);
+    } else {
+      serviceError = new ServerError('Error in service CRUD operations');
+    }
+
+    return next(serviceError);
   }
 };

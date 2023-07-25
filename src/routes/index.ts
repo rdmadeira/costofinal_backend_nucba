@@ -4,8 +4,7 @@ import productsRouter from './products.routes.js';
 import categoriesRouter from './categories.routes.js';
 import authRouter from './auth.routes.js';
 import ordersRouter from './orders.routes.js';
-
-import { verifyAuthorization } from '../middlewares/authorization.js';
+import userRouter from './user.routes.js';
 
 const router = Router();
 
@@ -19,4 +18,5 @@ router.use('/products', productsRouter);
 router.use('/categories', categoriesRouter);
 router.use('/auth', authRouter);
 router.use('/orders', ordersRouter);
+router.use('/user', userRouter);
 export default router;

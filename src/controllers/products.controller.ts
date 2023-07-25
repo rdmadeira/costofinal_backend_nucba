@@ -24,7 +24,14 @@ export const getProductsBySubcategoryIdController = async (
           : 'Products Found!',
     });
   } catch (error) {
-    const err = new ServerError('Error in product.find - MongoDB');
-    return next(err);
+    console.log('error', error);
+    let serviceError;
+    if (error instanceof Error) {
+      serviceError = new ServerError(error.message);
+    } else {
+      serviceError = new ServerError('Error in service CRUD operations');
+    }
+
+    return next(serviceError);
   }
 };

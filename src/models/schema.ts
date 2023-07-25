@@ -13,7 +13,7 @@ const SubcategoriesSchema = new Schema({
   name: String,
   category: {
     type: Schema.ObjectId,
-    ref: mongoose.model('categories', CategoriesSchema),
+    ref: 'categories',
     require: true,
   },
 });
@@ -31,7 +31,7 @@ const ProductsSchema = new Schema({
   SUBCATEGORY: {
     type: Schema.ObjectId,
     required: true,
-    ref: mongoose.model('subcategories', SubcategoriesSchema),
+    ref: 'subcategories',
   },
 });
 export type ProductsType = InferSchemaType<typeof ProductsSchema>;
@@ -72,7 +72,7 @@ const StatusSchema = new Schema({
   status: String,
 });
 export type StatusType = InferSchemaType<typeof StatusSchema>;
-export const status = mongoose.model('status', StatusSchema);
+export const status = mongoose.model<StatusType>('status', StatusSchema);
 
 const OrderSchema = new Schema({
   createdAt: { type: Date, default: Date.now() },
@@ -82,15 +82,18 @@ const OrderSchema = new Schema({
     required: true,
     ref: users,
   },
-  items: {
-    type: [{ id: { type: Schema.ObjectId, ref: products }, quantity: Number }],
-    required: true,
-  },
+  items: [
+    {
+      product: { type: Schema.ObjectId, ref: 'products', required: true },
+      quantity: { type: Number, required: true },
+    },
+  ],
+
   status: {
     type: Schema.ObjectId,
     default: '64bdbdb93873cdd7824ad762',
-    ref: status,
+    ref: 'status',
   },
 });
 export type OrdersType = InferSchemaType<typeof OrderSchema>;
-export const orders = mongoose.model('orders', OrderSchema);
+export const orders = mongoose.model<OrdersType>('orders', OrderSchema);

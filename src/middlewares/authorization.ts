@@ -40,7 +40,6 @@ export const verifyAuthorization = async (
       apellido: 1,
       email: 1,
     });
-    console.log('user', user);
 
     if (!user) {
       const notAuthorized = new NotAuthorizedError();
