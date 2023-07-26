@@ -45,16 +45,18 @@ export const updateUserByIdController = async (
   const userDataToUpdate = req.body;
 
   try {
-    const user = await users.findByIdAndUpdate(userId, { ...userDataToUpdate });
+    const user = await users
+      .findByIdAndUpdate(userId, { ...userDataToUpdate }, { new: true })
+      .select(['email']);
 
-    console.log('user', user);
     if (!user) {
       return res.status(200).json({ data: null, message: 'No user Found!' });
     }
 
-    return res
-      .status(200)
-      .json({ data: user, message: 'Get user succesfully!' });
+    return res.status(200).json({
+      data: { payload: { ...userDataToUpdate }, user: user },
+      message: 'Update user data succesfully!',
+    });
   } catch (error) {
     console.log('error', error);
     let serviceError;
