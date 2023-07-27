@@ -4,5 +4,5 @@ import { getProductsBySubcategoryIdController } from '../controllers/products.co
 
 const router = Router();
 
-router.get('/:subcategoryId', getProductsBySubcategoryIdController);
 export default router;
+router.get('/:subcategoryId', getProductsBySubcategoryIdController);

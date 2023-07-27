@@ -42,3 +42,34 @@ export const getSubcategoriesByCategoryIdController = async (
     return next(err);
   }
 };
+
+export const getSubCategoriesByUrlController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { categoryUrl } = req.params;
+
+    const category = await categories.findOne({ url: categoryUrl });
+
+    const subCategory: SubCategoriesType[] = await subCategories.find({
+      category: category?._id,
+    });
+
+    return res.status(200).json({
+      data: subCategory,
+      message: 'Subcategories found!',
+    });
+  } catch (error) {
+    console.log('error', error);
+    let serviceError;
+    if (error instanceof Error) {
+      serviceError = new ServerError(error.message);
+    } else {
+      serviceError = new ServerError('Error in service CRUD operations');
+    }
+
+    return next(serviceError);
+  }
+};

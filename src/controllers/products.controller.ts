@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { ProductsType } from '../models/schema.js';
+import { categories, ProductsType } from '../models/schema.js';
 import { products } from '../models/schema.js';
 
 import { ServerError } from '../entities/errors/ServerError.js';

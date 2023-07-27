@@ -40,15 +40,43 @@ function getFlatMapProductsJson() {
 }
 
 const categoriesList = [
-  { name: 'BRONCE ROSCADO PARA AGUA' },
-  { name: 'BRONCE TRAFILADO' },
-  { name: 'CODOS Y TEES PARA GAS' },
-  { name: 'POLIETILENO' },
-  { name: 'POLIPROPILENO' },
-  { name: 'REJAS Y TAPAS' },
-  { name: 'TERMOCUPLAS' },
-  { name: 'TERMOFUSION' },
-  { name: 'FERRETERIA' },
+  {
+    name: 'BRONCE ROSCADO PARA AGUA',
+    url: 'bronce-roscado-para-agua',
+  },
+
+  {
+    name: 'BRONCE TRAFILADO',
+    url: 'bronce-trafilado',
+  },
+  {
+    name: 'CODOS Y TEES PARA GAS',
+    url: 'codos-y-tees-para-gas',
+  },
+  {
+    name: 'POLIETILENO',
+    url: 'polietileno',
+  },
+  {
+    name: 'POLIPROPILENO',
+    url: 'polipropileno',
+  },
+  {
+    name: 'REJAS Y TAPAS',
+    url: 'rejas-y-tapas',
+  },
+  {
+    name: 'TERMOCUPLAS',
+    url: 'termocuplas',
+  },
+  {
+    name: 'TERMOFUSION',
+    url: 'termofusion',
+  },
+  {
+    name: 'FERRETERIA',
+    url: 'ferreteria',
+  },
 ];
 
 const subCategoriesList = [
@@ -153,7 +181,10 @@ const seedCategoriesToDB = async (
 
   try {
     documents.forEach(async (document) => {
-      await categories.updateOne(document, document, { upsert: true }); // Si no existe, agrega, si no mantiene
+      await categories.updateOne(
+        { name: document.name },
+        { url: document.url } /* , { upsert: true } */
+      ); // Si no existe, agrega, si no mantiene
     });
     console.log('Succesfully upsert many categories documents to database');
   } catch (error) {
@@ -248,11 +279,4 @@ const seedStatusToDB = async (
 
 // seedRolesToDB([{ role: 'admin' }, { role: 'user' }]/* , { drop: true } */);
 
-seedStatusToDB(
-  [
-    { status: 'pending' },
-    { status: 'process' },
-    { status: 'approved' },
-    { status: 'rejected' },
-  ] /* , { drop: true } */
-);
+// seedStatusToDB(  [    { status: 'pending' },    { status: 'process' },    { status: 'approved' },    { status: 'rejected' },  ] /* , { drop: true } */);

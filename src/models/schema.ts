@@ -2,7 +2,7 @@ import mongoose, { InferSchemaType } from 'mongoose';
 
 const Schema = mongoose.Schema;
 
-const CategoriesSchema = new Schema({ name: String });
+const CategoriesSchema = new Schema({ name: String, url: String });
 export type CategoriesType = InferSchemaType<typeof CategoriesSchema>;
 export const categories = mongoose.model<CategoriesType>(
   'categories',
