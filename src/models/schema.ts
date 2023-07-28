@@ -33,6 +33,10 @@ const ProductsSchema = new Schema({
     required: true,
     ref: 'subcategories',
   },
+  CATEGORY: {
+    type: Schema.ObjectId,
+    ref: 'categories',
+  },
 });
 export type ProductsType = InferSchemaType<typeof ProductsSchema>;
 export const products = mongoose.model<ProductsType>(

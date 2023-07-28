@@ -1,5 +1,6 @@
 import fs from 'fs';
 import { Document, ObjectId } from 'mongodb';
+import mongoose from 'mongoose';
 
 import { connectToDB } from './config.js';
 import {
@@ -242,6 +243,22 @@ const seedProductsToDB = async (
     console.log('error', error);
   }
 };
+const addCategoryToProducts = async () => {
+  await connectToDB().then(() => console.log('connected to DB'));
+
+  const subcategoriesAll = await subCategories.find({});
+
+  console.log('subcategoriesAll', subcategoriesAll);
+
+  subcategoriesAll.forEach(async (subCat) => {
+    console.log('subCat', subCat);
+
+    await products.updateMany(
+      { SUBCATEGORY: new mongoose.Types.ObjectId(subCat._id) },
+      { CATEGORY: subCat.category }
+    );
+  });
+};
 
 const seedRolesToDB = async (
   rolesList: RoleType[],
@@ -280,3 +297,5 @@ const seedStatusToDB = async (
 // seedRolesToDB([{ role: 'admin' }, { role: 'user' }]/* , { drop: true } */);
 
 // seedStatusToDB(  [    { status: 'pending' },    { status: 'process' },    { status: 'approved' },    { status: 'rejected' },  ] /* , { drop: true } */);
+
+// addCategoryToProducts();
