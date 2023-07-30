@@ -10,6 +10,6 @@ const router = Router();
 
 router.get('/', getCategoriesController);
 router.get('/:categoryUrl', getSubCategoriesByUrlController);
-router.get('/:categoryId', getSubcategoriesByCategoryIdController);
+router.get('/category/:categoryId', getSubcategoriesByCategoryIdController);
 
 export default router;

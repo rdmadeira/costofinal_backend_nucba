@@ -48,7 +48,11 @@ export const signupController = async (
     telefono,
     email,
     contrasena,
-    direccion: { numero, calle, localidad, CP, complemento },
+    numero,
+    calle,
+    localidad,
+    CP,
+    complemento,
   } = req.body;
 
   const salt = await bcrypt.genSalt(10);
@@ -76,7 +80,11 @@ export const signupController = async (
           telefono,
           email,
           contrasena: hash,
-          direccion: { numero, calle, localidad, CP, complemento },
+          numero,
+          calle,
+          localidad,
+          CP,
+          complemento,
         },
       },
       { upsert: true, new: true, returnDocument: 'after' }

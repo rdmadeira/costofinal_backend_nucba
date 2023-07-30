@@ -1,23 +1,47 @@
 import { Request, Response, NextFunction } from 'express';
-import { categories, ProductsType } from '../models/schema.js';
+import { categories, CategoriesType, ProductsType } from '../models/schema.js';
 import { products } from '../models/schema.js';
 
 import { ServerError } from '../entities/errors/ServerError.js';
+import mongoose from 'mongoose';
 
 export const getProductsByQuerycategoryIdController = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const { subcategoryId, categoryId } = req.query;
+  const { subcategoryId, categoryId, categoryUrl, populate } = req.query;
 
   try {
-    const productsBySubcategory: ProductsType[] = await products.find({
-      SUBCATEGORY: subcategoryId,
+    const categoryByUrl = await categories.find({
+      url: categoryUrl,
     });
-    const productsByCategory: ProductsType[] = await products.find({
-      CATEGORY: categoryId,
-    });
+
+    let productsBySubcategory;
+    let productsByCategory;
+    if (populate == 'true') {
+      productsBySubcategory = await products
+        .find({
+          SUBCATEGORY: subcategoryId,
+        })
+        .populate('SUBCATEGORY')
+        .populate('CATEGORY');
+      productsByCategory = await products
+        .find({
+          CATEGORY:
+            categoryId || new mongoose.Types.ObjectId(categoryByUrl[0]._id),
+        })
+        .populate('CATEGORY')
+        .populate('SUBCATEGORY');
+    } else {
+      productsBySubcategory = await products.find({
+        SUBCATEGORY: subcategoryId,
+      });
+      productsByCategory = await products.find({
+        CATEGORY:
+          categoryId || new mongoose.Types.ObjectId(categoryByUrl[0]._id),
+      });
+    }
 
     return res.status(200).json({
       subcategoryData: {
