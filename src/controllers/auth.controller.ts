@@ -80,11 +80,13 @@ export const signupController = async (
           telefono,
           email,
           contrasena: hash,
-          numero,
-          calle,
-          localidad,
-          CP,
-          complemento,
+          direccion: {
+            calle,
+            numero,
+            localidad,
+            CP,
+            complemento,
+          },
         },
       },
       { upsert: true, new: true, returnDocument: 'after' }
