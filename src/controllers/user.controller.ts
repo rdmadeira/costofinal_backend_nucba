@@ -14,7 +14,22 @@ export const postUserByTokenController = async (
   console.log('updatedData', updatedData);
 
   try {
-    const user = await users.updateOne({ _id: updatedData._id });
+    const user = await users.findOneAndUpdate(
+      { _id: updatedData._id },
+      {
+        nombre: updatedData.nombre,
+        apellido: updatedData.apellido,
+        telefono: updatedData.telefono,
+        direccion: {
+          calle: updatedData.calle,
+          numero: updatedData.numero,
+          localidad: updatedData.localidad,
+          CP: updatedData.CP,
+          complemento: updatedData.complemento,
+        },
+      },
+      { new: true }
+    );
 
     if (!user) {
       return res.status(200).json({ data: null, message: 'No user Found!' });
