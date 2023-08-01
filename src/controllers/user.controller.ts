@@ -5,13 +5,45 @@ import { BadRequestError } from '../entities/errors/BadRequestError.js';
 import { ServerError } from '../entities/errors/ServerError.js';
 import { users } from '../models/schema.js';
 
+export const postUserByTokenController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const updatedData = req.body;
+  console.log('updatedData', updatedData);
+
+  try {
+    const user = await users.updateOne({ _id: updatedData._id });
+
+    if (!user) {
+      return res.status(200).json({ data: null, message: 'No user Found!' });
+    }
+
+    return res.status(200).json({
+      data: user,
+
+      message: 'Updated user succesfully!',
+    });
+  } catch (error) {
+    console.log('error', error);
+    let serviceError;
+    if (error instanceof Error) {
+      serviceError = new ServerError(error.message);
+    } else {
+      serviceError = new ServerError('Error in service CRUD operations');
+    }
+
+    return next(serviceError);
+  }
+};
+
 export const getUserByTokenController = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   const { token, complete } = req.query;
-  console.log('token', token);
 
   if (!token) {
     return next(new BadRequestError('Token query is required'));
@@ -25,8 +57,6 @@ export const getUserByTokenController = async (
     if (!user) {
       return res.status(200).json({ data: null, message: 'No user Found!' });
     }
-
-    console.log('user', user, complete);
 
     return res.status(200).json({
       data: complete

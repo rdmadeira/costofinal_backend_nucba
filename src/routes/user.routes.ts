@@ -4,6 +4,7 @@ import {
   getUserByIdController,
   updateUserByIdController,
   getUserByTokenController,
+  postUserByTokenController,
 } from '../controllers/user.controller.js';
 import { verifyAuthorization } from '../middlewares/authorization.js';
 
@@ -11,6 +12,7 @@ const router = Router();
 
 router
   .get('/', verifyAuthorization, getUserByTokenController)
+  .post('/', verifyAuthorization, postUserByTokenController)
   .get('/:userId', verifyAuthorization, getUserByIdController)
   .put('/:userId', verifyAuthorization, updateUserByIdController);
 

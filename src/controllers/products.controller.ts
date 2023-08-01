@@ -17,6 +17,12 @@ export const getProductsByQuerycategoryIdController = async (
       url: categoryUrl,
     });
 
+    if (!categoryUrl && !categoryId && !subcategoryId) {
+      const allProducts = await products.find({});
+
+      return res.json({ data: allProducts, message: 'Get all products' });
+    }
+
     let productsBySubcategory;
     let productsByCategory;
     if (populate == 'true') {
