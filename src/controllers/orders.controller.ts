@@ -1,8 +1,11 @@
 import { populate } from 'dotenv';
 import { Request, Response, NextFunction } from 'express';
 import { ObjectId } from 'mongodb';
+import jwt from 'jsonwebtoken';
 
 import { ServerError } from '../entities/errors/ServerError.js';
+import { NotAuthorizedError } from '../entities/errors/NotAuthorizedError.js';
+
 import { OrdersType, orders, products } from '../models/schema.js';
 
 export const postOrderController = async (
@@ -42,15 +45,20 @@ export const postOrderController = async (
   }
 };
 
-export const getOrdersByUserIdController = async (
+export const getOrdersByTokenController = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const { userId } = req.params;
+  const { token } = req.query;
+
+  if (!token) {
+    return next(new NotAuthorizedError());
+  }
 
   try {
-    const userOrders = await orders.find({ user: userId });
+    const decode: any = jwt.verify(token as string, process.env.JWT_SECRET!);
+    const userOrders = await orders.find({ user: decode.id });
 
     res.json({
       data: userOrders,

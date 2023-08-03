@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
 import { BadRequestError } from '../entities/errors/BadRequestError.js';
+import { NotAuthorizedError } from '../entities/errors/NotAuthorizedError.js';
 import { ServerError } from '../entities/errors/ServerError.js';
 import { users } from '../models/schema.js';
 
@@ -61,7 +62,7 @@ export const getUserByTokenController = async (
   const { token, complete } = req.query;
 
   if (!token) {
-    return next(new BadRequestError('Token query is required'));
+    return next(new NotAuthorizedError());
   }
 
   const decode: any = jwt.verify(token as string, process.env.JWT_SECRET!);
