@@ -1,4 +1,3 @@
-import { populate } from 'dotenv';
 import { Request, Response, NextFunction } from 'express';
 import { ObjectId } from 'mongodb';
 import jwt from 'jsonwebtoken';
@@ -13,7 +12,8 @@ export const postOrderController = async (
   res: Response,
   next: NextFunction
 ) => {
-  const orderData: OrdersType = req.body;
+  const orderData = req.body;
+  console.log('orderData', orderData);
 
   try {
     const postOrderResponse = await (
@@ -58,7 +58,10 @@ export const getOrdersByTokenController = async (
 
   try {
     const decode: any = jwt.verify(token as string, process.env.JWT_SECRET!);
-    const userOrders = await orders.find({ user: decode.id });
+    const userOrders = await orders
+      .find({ user: decode.id })
+      .populate('status')
+      .populate({ path: 'items', populate: { path: 'product' } });
 
     res.json({
       data: userOrders,
