@@ -28,6 +28,7 @@ export const postOrderController = async (
     if (!postOrderResponse._id) {
       return next(new Error('Failed to create order'));
     }
+    console.log('postOrderResponse', postOrderResponse);
 
     return res
       .status(200)

@@ -60,36 +60,43 @@ export const getUserByTokenController = async (
   next: NextFunction
 ) => {
   const { token, complete } = req.query;
+  console.log('token', token);
 
   if (!token) {
-    return next(new NotAuthorizedError());
+    return res.status(200).json({ data: null, message: 'No user Found!' });
   }
 
-  const decode: any = jwt.verify(token as string, process.env.JWT_SECRET!);
-
   try {
-    const user = await users.findById(decode.id);
+    const decode: any = jwt.verify(token as string, process.env.JWT_SECRET!);
+    console.log('decode', decode);
 
-    if (!user) {
-      return res.status(200).json({ data: null, message: 'No user Found!' });
+    try {
+      const user = await users.findById(decode.id);
+
+      if (!user) {
+        return next(new NotAuthorizedError());
+      }
+
+      return res.status(200).json({
+        data: complete
+          ? user
+          : { email: user.email, _id: user._id, token, nombre: user.nombre },
+        message: 'Get user succesfully!',
+      });
+    } catch (error) {
+      console.log('error', error);
+      let serviceError;
+      if (error instanceof Error) {
+        serviceError = new ServerError(error.message);
+      } else {
+        serviceError = new ServerError('Error in service CRUD operations');
+      }
+
+      return next(serviceError);
     }
-
-    return res.status(200).json({
-      data: complete
-        ? user
-        : { email: user.email, _id: user._id, token, nombre: user.nombre },
-      message: 'Get user succesfully!',
-    });
   } catch (error) {
-    console.log('error', error);
-    let serviceError;
-    if (error instanceof Error) {
-      serviceError = new ServerError(error.message);
-    } else {
-      serviceError = new ServerError('Error in service CRUD operations');
-    }
-
-    return next(serviceError);
+    const jwtError = new NotAuthorizedError();
+    return next(jwtError);
   }
 };
 
