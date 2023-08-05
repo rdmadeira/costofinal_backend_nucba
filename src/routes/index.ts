@@ -5,6 +5,7 @@ import categoriesRouter from './categories.routes.js';
 import authRouter from './auth.routes.js';
 import ordersRouter from './orders.routes.js';
 import userRouter from './user.routes.js';
+import { mailingController } from '../controllers/mailing.controller.js';
 
 const router = Router();
 
@@ -19,4 +20,7 @@ router.use('/categories', categoriesRouter);
 router.use('/auth', authRouter);
 router.use('/orders', ordersRouter);
 router.use('/users', userRouter);
+
+router.post('/mailing', mailingController);
+
 export default router;
