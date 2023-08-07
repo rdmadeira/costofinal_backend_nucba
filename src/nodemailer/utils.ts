@@ -30,7 +30,11 @@ export const sendMailOrder = (mailData: MailData) => {
   return sendMailOptions;
 };
 
-export const sendMailLinkPasswordOptions = (email: string, nombre: string) => {
+export const sendMailLinkPasswordOptions = (
+  email: string,
+  nombre: string,
+  token: string
+) => {
   const sendMailOptions: Mail.Options = {
     from: process.env.MAIL!,
     to: email,
@@ -39,7 +43,7 @@ export const sendMailLinkPasswordOptions = (email: string, nombre: string) => {
     html: `
     <h2>Hola ${nombre}!</h2>
     <p>Para definir una nueva contraseña, hacé el clique en el link abajo:</p>
-    <p><a href='https://costofinal-backend-810debfecaf4.herokuapp.com/index.html?email=${email}'>Definir una nueva contraseña</a></p>
+    <p><a href='${process.env.APP_BASE_URL}index.html?email=${email}&token=${token}'>Definir una nueva contraseña</a></p>
     `,
   };
 

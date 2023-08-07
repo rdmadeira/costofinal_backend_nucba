@@ -172,14 +172,26 @@ export const sendLinkToMailController = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { email, nombre } = req.query;
+  const { email } = req.query;
 
   if (!email) return next(new BadRequestError(`email required`));
-  if (!nombre) return next(new BadRequestError(`nombre required`));
+
+  const user = await users.findOne({ email: email });
+  if (!user) return next(new BadRequestError(`email required`));
+
+  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET!, {
+    expiresIn: '60s',
+  });
+
+  if (!user || !user.nombre) {
+    return next(new BadRequestError(`email not Found`));
+  }
+  console.log('user.nombre', user);
 
   const sendMailOptions = sendMailLinkPasswordOptions(
     email as string,
-    nombre as string
+    user.nombre as string,
+    token
   );
 
   transporter.sendMail(sendMailOptions, (err, info) => {
