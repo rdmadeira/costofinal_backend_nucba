@@ -7,12 +7,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --exec node --loader ts-node/esm src/server.ts",
-    "build": "npx tsc --build tsconfig.json",
-    "seed": "ts-node-esm src/config/db/seed.ts"
+    "seed": "ts-node-esm src/config/db/seed.ts",
+    "build": "npx tsc --build tsconfig.json"
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/rdmadeira/costofinal_backend_nucba.git"
   },
   "author": "Rodrigo",
   "license": "ISC",
