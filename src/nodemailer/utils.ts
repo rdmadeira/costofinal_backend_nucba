@@ -43,7 +43,8 @@ export const sendMailLinkPasswordOptions = (
     html: `
     <h2>Hola ${nombre}!</h2>
     <p>Para definir una nueva contraseña, hacé el clique en el link abajo:</p>
-    <p><a href='${process.env.APP_BASE_URL}reset.html?email=${email}&token=${token}'>Definir una nueva contraseña</a></p>
+    <p><a href='${process.env
+      .APP_BASE_URL!}reset.html?email=${email}&token=${token}'>Definir una nueva contraseña</a></p>
     `,
   };
 
