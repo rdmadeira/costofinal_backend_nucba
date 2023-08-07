@@ -4,7 +4,7 @@ import transporter from '../nodemailer/config.js';
 
 import { users } from '../models/schema.js';
 
-import { sendMail } from '../nodemailer/utils.js';
+import { sendMailOrder } from '../nodemailer/utils.js';
 
 import { ServerError } from '../entities/errors/ServerError.js';
 import { BadRequestError } from '../entities/errors/BadRequestError.js';
@@ -23,25 +23,24 @@ export const mailingController = async (
     if (!user) {
       return next(new BadRequestError('User Not Found'));
     }
-    try {
-      const sendMailOptions = sendMail({ ...mailData, email: user.email });
+    const sendOrderMailOptions = sendMailOrder({
+      ...mailData,
+      email: user.email,
+    });
 
-      transporter.sendMail(
-        sendMailOptions,
-        (error: Error | null, info: SMTPTransport.SentMessageInfo) => {
-          if (error) {
-            console.log('error', error);
-            return next(error);
-          }
-          if (info) {
-            console.log('info', info);
-            return res.status(200).json({ data: info });
-          }
+    transporter.sendMail(
+      sendOrderMailOptions,
+      (error: Error | null, info: SMTPTransport.SentMessageInfo) => {
+        if (error) {
+          console.log('error', error);
+          return next(error);
         }
-      );
-    } catch (error) {
-      console.log('errorerror', error);
-    }
+        if (info) {
+          console.log('info', info);
+          return res.status(200).json({ data: info });
+        }
+      }
+    );
   } catch (error: Error | any | unknown) {
     const findByIdError = new ServerError(
       (error.message as string) ||
