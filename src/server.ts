@@ -16,6 +16,7 @@ const PORT = process.env.PORT || 8000;
 // Middlewares:
 server.use(express.json());
 server.use(cors());
+server.use(express.static('public'));
 
 // Routes:
 server.get('/', async (req, res) => {

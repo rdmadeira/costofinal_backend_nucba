@@ -3,6 +3,8 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 import { users } from '../models/schema.js';
+import { sendMailLinkPasswordOptions } from '../nodemailer/utils.js';
+import transporter from '../nodemailer/config.js';
 import { ServerError } from '../entities/errors/ServerError.js';
 import { MongooseError } from 'mongoose';
 import { BadRequestError } from '../entities/errors/BadRequestError.js';
@@ -124,4 +126,72 @@ export const signupController = async (
 
     return next(serviceError);
   }
+};
+
+export const updatePasswordController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { email, password } = req.body;
+  /* let pw1 = window.prompt('Ingrese la nueva contraseña');
+  let pw2 = window.prompt('Confirme la nueva contraseña');
+
+  if (!pw1) {
+    return alert('Ingrese una contraseña');
+  }
+
+  if (pw1 !== pw2) {
+    return alert('La contraseña confirmada no es igual');
+  } */
+
+  const salt = await bcrypt.genSalt(10);
+  const hash = await bcrypt.hash(password, salt);
+
+  try {
+    const user = await users.findOneAndUpdate(
+      { email: email },
+      { contrasena: hash },
+      { new: true }
+    );
+
+    if (!user) {
+      return res.status(400).json({ message: 'No user found!' });
+    }
+
+    return res.status(200).json({ message: 'Succesfully set new password' });
+  } catch (error: MongooseError | any | unknown) {
+    const updatedPwError = new ServerError(error.message);
+
+    return next(updatedPwError);
+  }
+};
+
+export const sendLinkToMailController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { email, nombre } = req.query;
+
+  if (!email) return next(new BadRequestError(`email required`));
+  if (!nombre) return next(new BadRequestError(`nombre required`));
+
+  const sendMailOptions = sendMailLinkPasswordOptions(
+    email as string,
+    nombre as string
+  );
+
+  transporter.sendMail(sendMailOptions, (err, info) => {
+    if (err) {
+      console.log('error', err);
+
+      const nodeMailerError = new ServerError(err.message);
+      return next(nodeMailerError);
+    }
+
+    console.log('info', info);
+
+    return res.status(200).json({ message: 'Successfully mail sent' });
+  });
 };

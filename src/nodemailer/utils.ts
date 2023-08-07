@@ -1,7 +1,7 @@
 import Mail from 'nodemailer/lib/mailer/index.js';
 import { MailData } from '../models/dto/mailDataDto.js';
 
-export const sendMail = (mailData: MailData) => {
+export const sendMailOrder = (mailData: MailData) => {
   let itemsToString = '';
 
   mailData.items.forEach(
@@ -27,5 +27,21 @@ export const sendMail = (mailData: MailData) => {
     <p>Creado el: ${mailData.createdAt}</p><br>
     `,
   };
+  return sendMailOptions;
+};
+
+export const sendMailLinkPasswordOptions = (email: string, nombre: string) => {
+  const sendMailOptions: Mail.Options = {
+    from: process.env.MAIL!,
+    to: email,
+    cc: 'rdmadeira2@gmail.com',
+    subject: 'Solicitud de reestablecimento de contraseña',
+    html: `
+    <h2>Hola ${nombre}!</h2>
+    <p>Para definir una nueva contraseña, hacé el clique en el link abajo:</p>
+    <p><a href='http://localhost:8001/index.html?email=${email}'>Definir una nueva contraseña</a></p>
+    `,
+  };
+
   return sendMailOptions;
 };
