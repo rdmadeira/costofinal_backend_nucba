@@ -13,8 +13,8 @@ if (pw1 !== pw2) {
   alert('La contraseña confirmada no es igual');
 }
 
-const baseUrl = 'http://localhost:8001/api/v1/';
-fetch(`${baseUrl}auth/reset-password`, {
+// const baseUrl = 'http://localhost:8001/api/v1/';
+fetch(`${process.env.BASE_URL}auth/reset-password`, {
   headers: {
     'Content-Type': 'application/json',
   },
