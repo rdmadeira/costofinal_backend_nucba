@@ -11,7 +11,7 @@ import { verifyAuthorization } from '../middlewares/authorization.js';
 const router = Router();
 
 router
-  .get('/', verifyAuthorization, getUserByTokenController)
+  .get('/', getUserByTokenController)
   .post('/', verifyAuthorization, postUserByTokenController)
   .get('/:userId', verifyAuthorization, getUserByIdController)
   .put('/:userId', verifyAuthorization, updateUserByIdController);
