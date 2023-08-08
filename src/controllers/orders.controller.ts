@@ -51,14 +51,19 @@ export const getOrdersByTokenController = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { token } = req.query;
+  const { authorization }: any = req.headers;
+
+  const token =
+    authorization &&
+    authorization.startsWith('Bearer') &&
+    authorization.split(' ')[1];
 
   if (!token) {
     return next(new NotAuthorizedError());
   }
 
   try {
-    const decode: any = jwt.verify(token as string, process.env.JWT_SECRET!);
+    const decode: any = jwt.verify(token, process.env.JWT_SECRET!);
     const userOrders = await orders
       .find({ user: decode.id })
       .populate('status')

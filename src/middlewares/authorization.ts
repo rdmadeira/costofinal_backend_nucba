@@ -49,7 +49,7 @@ export const verifyAuthorization = async (
     return next();
   } catch (error) {
     if (error instanceof JsonWebTokenError) {
-      const invalidSignature = new BadRequestError('Invalid Token Signature');
+      const invalidSignature = new NotAuthorizedError();
       return next(invalidSignature);
     }
 

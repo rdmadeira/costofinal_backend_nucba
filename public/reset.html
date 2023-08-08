@@ -2,25 +2,49 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" href="./favicon.ico?v=2" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="reset.css" rel="stylesheet" />
     <title>Ingrese la nueva contraseña</title>
   </head>
   <body>
-    <h2>Ingrese la nueva contraseña</h2>
-    <form>
-      <div class="input-controller">
-        <label>Contraseña</label>
-        <input type="password" placeholder="Ingrese la nueva contraseña" />
+    <div class="body-ctn flexcenter column">
+      <h2>Ingrese la nueva contraseña</h2>
+      <div class="flexcenter column box form-ctn">
+        <form class="flexcenter column form" id="45vcrfg">
+          <img
+            src="./assets/costofinal.jpeg"
+            alt="Costo-Final"
+            width="20px"
+            style="margin-top: 20px"
+          />
+          <div class="input-controller flexcenter column box">
+            <label class="flexself-left">Contraseña</label>
+            <input
+              type="password"
+              placeholder="Nueva contraseña"
+              class="pw-input"
+              name="password"
+              required
+            />
+          </div>
+          <div class="input-controller flexcenter column box">
+            <label class="flexself-left">Confirme la Contraseña</label>
+            <input
+              type="password"
+              placeholder="Nueva contraseña"
+              class="pw-input"
+              name="confirm"
+              required
+            />
+          </div>
+          <div class="input-controller flexcenter column box">
+            <input type="submit" value="Enviar" class="form-button" />
+          </div>
+        </form>
       </div>
-      <div class="input-controller">
-        <label>Confirme la Contraseña</label>
-        <input type="password" placeholder="Ingrese la nueva contraseña" />
-      </div>
-      <div class="input-controller">
-        <input type="button" value="Ingrese la nueva contraseña" />
-      </div>
-    </form>
+    </div>
   </body>
   <script src="./index.js"></script>
 </html>
