@@ -134,16 +134,6 @@ export const updatePasswordController = async (
   next: NextFunction
 ) => {
   const { email, password } = req.body;
-  /* let pw1 = window.prompt('Ingrese la nueva contraseña');
-  let pw2 = window.prompt('Confirme la nueva contraseña');
-
-  if (!pw1) {
-    return alert('Ingrese una contraseña');
-  }
-
-  if (pw1 !== pw2) {
-    return alert('La contraseña confirmada no es igual');
-  } */
 
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);

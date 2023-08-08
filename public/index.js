@@ -14,9 +14,9 @@ if (pw1 !== pw2) {
   alert('La contraseña confirmada no es igual');
 }
 
-// const baseUrl = 'http://localhost:8001/api/v1/';
+//`http://localhost:8001/api/v1/auth/reset-password`,
 fetch(
-  `https://costofinal-backend-810debfecaf4.herokuapp.com/api/v1/auth/reset-password`,
+  'https://costofinal-backend-810debfecaf4.herokuapp.com/api/v1/auth/reset-password',
   {
     headers: {
       'Content-Type': 'application/json',
@@ -26,14 +26,37 @@ fetch(
     body: JSON.stringify({ email: email, password: pw1 }),
   }
 )
-  .then((res) => res.json())
+  .then((res) => {
+    console.log('res', res);
+
+    /* if (!res.ok) {
+      return res.text().then((resp) => {
+        console.log('resp', resp);
+        throw new Error(resp);
+      });
+    } */
+
+    return res.json();
+  })
   .then((data) => {
+    console.log('data', data);
+    if (data.errors) {
+      let errorsString = '';
+      data.errors.forEach((err) => (errorsString += '. ' + err.message));
+
+      alert(
+        'Ocurrió un error al cambiar la contraseña: ' +
+          errorsString +
+          'Solicite un nuevo link'
+      );
+      return (location.href = 'https://costofinal-frontend-nucba.vercel.app/');
+    }
+
     alert(data.message);
-    location.href = 'https://costofinal-frontend-nucba.vercel.app/';
+    return (location.href = 'https://costofinal-frontend-nucba.vercel.app/');
   })
   .catch((err) => {
     console.log('err', err);
-    let errorsMessage = '';
-    err.errors.forEach((errItem) => (errorsMessage += '. ' + errItem.message));
-    alert('Ocurrió un error al cambiar la contraseña. ' + errorsMessage);
+
+    alert('Ocurrió un error al cambiar la contraseña. ' + err.message);
   });
