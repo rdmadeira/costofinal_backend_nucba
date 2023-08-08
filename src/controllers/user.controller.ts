@@ -59,8 +59,13 @@ export const getUserByTokenController = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { token, complete } = req.query;
-  console.log('token', token);
+  const { complete } = req.query;
+  const { authorization }: any = req.headers;
+
+  const token =
+    authorization &&
+    authorization.startsWith('Bearer') &&
+    authorization.split(' ')[1];
 
   if (!token) {
     return res.status(200).json({ data: null, message: 'No user Found!' });
@@ -68,7 +73,6 @@ export const getUserByTokenController = async (
 
   try {
     const decode: any = jwt.verify(token as string, process.env.JWT_SECRET!);
-    console.log('decode', decode);
 
     try {
       const user = await users.findById(decode.id);

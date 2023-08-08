@@ -10,7 +10,7 @@ const router = Router();
 
 router
   .post('/', verifyAuthorization, postOrderController)
-  .get('/', getOrdersByTokenController)
-  .get('/order/:orderId', getOrderByIdController);
+  .get('/', verifyAuthorization, getOrdersByTokenController)
+  .get('/order/:orderId', verifyAuthorization, getOrderByIdController);
 
 export default router;
