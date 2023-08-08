@@ -27,5 +27,13 @@ fetch(
   }
 )
   .then((res) => res.json())
-  .then((data) => alert(data.message))
-  .catch((err) => console.log('err', err));
+  .then((data) => {
+    alert(data.message);
+    location.href = 'https://costofinal-frontend-nucba.vercel.app/';
+  })
+  .catch((err) => {
+    console.log('err', err);
+    let errorsMessage = '';
+    err.errors.forEach((errItem) => (errorsMessage += '. ' + errItem.message));
+    alert('Ocurrió un error al cambiar la contraseña. ' + errorsMessage);
+  });
