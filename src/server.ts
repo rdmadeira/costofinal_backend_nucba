@@ -8,7 +8,8 @@ import { errorHandle } from './middlewares/errorHandler.js';
 import { NotFoundError } from './entities/errors/NotFoundError.js';
 
 dotenv.config();
-connectToDB().catch((error) => console.log('error', error));
+
+connectToDB();
 
 const server: Express = express();
 const PORT = process.env.PORT || 8000;

@@ -79,37 +79,3 @@ export const getProductsByQuerycategoryIdController = async (
     return next(serviceError);
   }
 };
-
-/* export const getProductsByCategoryIdController = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  const { categoryId } = req.query;
-  console.log('categoryId', categoryId);
-
-  try {
-    const productsBySubcategory: ProductsType[] = await products.find({
-      CATEGORY: categoryId,
-    });
-
-    return res.status(200).json({
-      data: productsBySubcategory,
-      length: productsBySubcategory.length,
-      message:
-        productsBySubcategory.length < 1
-          ? 'No products found!'
-          : 'Products Found!',
-    });
-  } catch (error) {
-    console.log('error', error);
-    let serviceError;
-    if (error instanceof Error) {
-      serviceError = new ServerError(error.message);
-    } else {
-      serviceError = new ServerError('Error in service CRUD operations');
-    }
-
-    return next(serviceError);
-  }
-}; */
